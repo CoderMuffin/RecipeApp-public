@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeBackend", "RecipeBackend\RecipeBackend.csproj", "{B4B110AF-FB5C-44F9-88EE-39B7CDC5EC69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4B110AF-FB5C-44F9-88EE-39B7CDC5EC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B110AF-FB5C-44F9-88EE-39B7CDC5EC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B110AF-FB5C-44F9-88EE-39B7CDC5EC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B110AF-FB5C-44F9-88EE-39B7CDC5EC69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED5201A5-EC59-4289-B9E1-1A5E83F5ED60}
+	EndGlobalSection
+EndGlobal

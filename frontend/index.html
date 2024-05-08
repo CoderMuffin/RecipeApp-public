@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ext/framework7-bundle.min.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+    <title>Recipes</title>
+    <style>
+        /* no wait for css files */
+        #preloader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: #fff;
+            z-index: 999999;
+            transition: opacity 0.5s;
+            opacity: 1;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            #preloader {
+                background-color: #1a1c1e;
+            }
+        }
+
+        #spinny {
+            position: absolute;
+            border-radius: 9999px;
+            height: 10vmin;
+            width: 10vmin;
+            border-left: 4px solid #00a7ff;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation: spinny 1s infinite linear;
+        }
+
+        @keyframes spinny {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <div id="preloader">
+        <div id="spinny"></div>
+    </div>
+    <div id="app">
+        <div class="login-screen" id="login-view">
+            <div class="page login-screen-page">
+                <div class="page-content login-screen-content">
+                    <div class="login-screen-title">Login</div>
+                    <form id="form-login" autocomplete="on" class="list">
+                        <ul>
+                            <li class="item-content item-input item-input-outline">
+                                <div class="item-inner">
+                                    <div class="item-title item-floating-label">Email</div>
+                                    <div class="item-input-wrap">
+                                        <input type="text" id="login-email" autocomplete="email" />
+                                        <span class="input-clear-button"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input item-input-outline">
+                                <div class="item-inner">
+                                    <div class="item-title item-floating-label">Password</div>
+                                    <div class="item-input-wrap">
+                                        <input type="password" id="login-password" autocomplete="current-password" />
+                                        <span class="input-clear-button"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="block">
+                                <button type="submit" class="button button-active">Sign In</button>
+                            </li>
+                            <li class="block">
+                                No account? <a id="link-register">Register</a><br />
+                                Forgot password? <a id="link-reset">Reset</a>
+                            </li>
+                        </ul>
+                    </form>
+                </div><br />
+                <div class="block-footer">Made by CoderMuffin 2023 :D</div>
+            </div>
+        </div>
+    </div>
+    <div class="login-screen" id="register-view">
+        <div class="page login-screen-page">
+            <div class="page-content login-screen-content">
+                <div class="login-screen-title">Register</div>
+                <div class="list">
+                    <p class="fadeable-field fadeable-field-hidden" id="register-code-guidance">A code has been emailed
+                        to you. Enter it to confirm your account.</p>
+                    <ul>
+                        <li id="register-email-container"
+                            class="fadeable-field item-content item-input item-input-outline">
+                            <div class="item-inner">
+                                <div class="item-title item-floating-label">Email</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" id="register-email" autocomplete="off" />
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="register-password-container"
+                            class="fadeable-field item-content item-input item-input-outline">
+                            <div class="item-inner">
+                                <div class="item-title item-floating-label">Password</div>
+                                <div class="item-input-wrap">
+                                    <input type="password" id="register-password" autocomplete="off" />
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="register-code-container"
+                            class="fadeable-field fadeable-field-hidden item-content item-input item-input-outline">
+                            <div class="item-inner">
+                                <div class="item-title item-floating-label">Code</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" id="register-code" autocomplete="off" />
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="block">
+                            <button class="button button-active" id="button-register">Register</button>
+                        </li>
+                        <li class="block">
+                            Already have an account? <a class="link-login">Login</a>
+                        </li>
+                    </ul>
+                </div><br />
+                <div class="block-footer">Made by CoderMuffin 2023 :D</div>
+            </div>
+        </div>
+    </div>
+    <div class="login-screen" id="reset-view">
+        <div class="page login-screen-page">
+            <div class="page-content login-screen-content">
+                <div class="login-screen-title">Reset password</div>
+                <div class="list">
+                    <p style="text-align: center" class="fadeable-field fadeable-field-hidden" id="reset-code-guidance">
+                        A code has been emailed
+                        to you. Enter it to reset your password.</p>
+                    <ul>
+                        <li id="reset-email-container"
+                            class="fadeable-field item-content item-input item-input-outline">
+                            <div class="item-inner">
+                                <div class="item-title item-floating-label">Email</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" id="reset-email" autocomplete="off" />
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="reset-code-container"
+                            class="fadeable-field fadeable-field-hidden item-content item-input item-input-outline">
+                            <div class="item-inner">
+                                <div class="item-title item-floating-label">Code</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" id="reset-code" autocomplete="off" />
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="reset-password-container"
+                            class="fadeable-field fadeable-field-hidden item-content item-input item-input-outline">
+                            <div class="item-inner">
+                                <div class="item-title item-floating-label">New password</div>
+                                <div class="item-input-wrap">
+                                    <input type="password" id="reset-password" autocomplete="off" />
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="block">
+                            <button class="button button-active" id="button-reset">Reset password</button>
+                        </li>
+                        <li class="block">
+                            Already have an account? <a class="link-login">Login</a>
+                        </li>
+                    </ul>
+                </div><br />
+                <div class="block-footer">Made by CoderMuffin 2023 :D</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup popup-tablet-fullscreen" id="recipe-popup">
+        <div class="page">
+            <div class="navbar">
+                <div class="navbar-bg"></div>
+                <div class="navbar-inner">
+                    <div class="title" id="recipe-title-top">Recipe title</div>
+                    <div class="right"><a class="link popup-close"><i class="material-icons">close</i></a></div>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="block" id="recipe-view-content">
+                    <div id="recipe-view-details">
+                        <h1 id="recipe-title"></h1>
+                        <p id="recipe-info"></p>
+                        <div style="display: flex; align-items: center">
+                            <span>Tags:</span>
+                            <span id="recipe-tags"></span>
+                            <a style="flex-shrink: 1;"
+                                class="button button-outline item-link smart-select smart-select-init"
+                                data-open-in="popover">
+                                <select multiple id="recipe-tag-select"></select>
+                                Edit tags
+                            </a>
+                        </div>
+                        <hr />
+                        <img id="recipe-image" />
+                        <p id="recipe-description"></p>
+                        <hr />
+                        <div style="margin-bottom: 8px">
+                            <button class="button button-active" id="recipe-button-edit">Edit</button><button
+                                class="button color-red" id="recipe-button-delete">Delete</button>
+                        </div>
+                    </div>
+                    <div id="recipe-view-edit" style="display: none; opacity: 0">
+                        <div class="list list-strong inset">
+                            <ul style="padding: 16px 8px">
+                                <li>
+                                    <div class="item-content item-input item-input-outline">
+                                        <div class="item-inner">
+                                            <div class="item-title item-floating-label">Title</div>
+                                            <div class="item-input-wrap">
+                                                <input id="edit-title" type="text" name="name"
+                                                    placeholder="Recipe title" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="text-editor" id="recipe-description-editor-edit">
+                                                <div id="edit-description" class="text-editor-content" contenteditable>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content" style="padding-right: 16px /* i dont know why */">
+                                        <button class="button button-active" id="upload-image-button-edit">Select image</button>
+                                        <img id="upload-image-preview-edit"/>
+                                    </div>
+                                    <input id="upload-image-input-edit" type="file" hidden/>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <button class="button button-outline" style="width: 32%; float: left; margin-right: 2%"
+                                id="recipe-button-cancel">Cancel</button>
+                            <button class="button button-active" style="width: 66%"
+                                id="recipe-button-save">Save</button>
+                        </div>
+                    </div>
+                    <div id="recipe-file-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="main-page">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a class="panel-open" style="margin: 0 16px"><i class="icon material-icons">menu</i></a>
+                    <a class="tab-link" href="#view-home" style="margin-right: 16px;"><i class="icon material-icons">home</i></a>
+                </div>
+                <div id="main-title" class="title">Recipe app</div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="panel panel-left panel-cover panel-init">
+                <div class="list menu-list" id="menu-list">
+                    <ul>
+                        <li>
+                            <a class="item-content item-link tab-link tab-link-active panel-close" href="#view-home">
+                                <div class="item-media">
+                                    <i class="icon material-icons">home</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Home</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="item-content item-link tab-link panel-close" href="#view-search" onclick="ID.inputSearch.value = ''; searchRecipes()">
+                                <div class="item-media">
+                                    <i class="icon material-icons">search</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Search</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="item-content item-link tab-link panel-close" href="#view-add">
+                                <div class="item-media">
+                                    <i class="icon material-icons">add</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Add recipe</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="item-content item-link tab-link panel-close" href="#view-categories">
+                                <div class="item-media">
+                                    <i class="icon material-icons">folder</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Categories</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="item-content item-link panel-close" id="panel-menu-logout">
+                                <div class="item-media">
+                                    <i class="icon material-icons">logout</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Log out</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="views safe-areas">
+                <div class="tabs-animated-wrap">
+                    <div class="tabs">
+                        <div id="view-home" class="view view-init view-main tab tab-active">
+                            <div id="menu-cards">
+                                <div id="menu-cards-container" style="width: 903px; height: 903px;">
+                                    <div class="menu-cards-row">
+                                        <button class="menu-cards-row button button-raised tab-link" style="width: 100%" href="#view-search" onclick="ID.inputSearch.value = ''; searchRecipes()">
+                                            <i class="icon material-icons md-only color-green">search</i>
+                                            <h1>Search recipes</h1>
+                                        </button>
+                                    </div>
+                                    <div class="menu-cards-row" style="margin-top: var(--menu-margin)">
+                                        <button class="button button-raised tab-link" href="#view-categories">
+                                            <i class="icon material-icons color-pink">folder</i>
+                                            <h1>Categories</h1>
+                                        </button>
+                                        <button class="button button-raised tab-link" style="margin-left: var(--menu-margin)" href="#view-add">
+                                            <i class="icon material-icons">add</i>
+                                            <h1>Create recipe</h1>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="view-search" class="view view-init tab" style="display: flex; flex-direction: column">
+                            <div class="searchbar" style="flex-shrink: 0">
+                                <div class="searchbar-inner">
+                                    <div class="searchbar-input-wrap">
+                                        <input id="input-search" type="search" placeholder="Search..." />
+                                        <i class="icon searchbar-icon material-icons">search</i>
+                                        <span class="input-clear-button"></span>
+                                    </div>
+                                    <span class="searchbar-disable-button">Cancel</span>
+                                    <button id="button-search" class="button button-active">GO</button>
+                                </div>
+                            </div>
+
+                            <div class="list media-list list-outline-ios list-strong-ios list-dividers-ios" style="overflow: auto">
+                                <ul id="search-results"></ul>
+                            </div>
+
+                            <div class="fab fab-right-bottom">
+                                <a class="tab-link" href="#view-add">
+                                    <i class="icon material-icons md-only">add</i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="view-categories" class="view view-init tab">
+                            <div class="list list-strong">
+                                <ul id="category-list">
+
+                                </ul>
+                            </div>
+                            <div class="fab fab-right-bottom" id="fab-new-category">
+                                <a>
+                                    <i class="icon material-icons md-only">add</i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="view-add" class="view view-init tab">
+                            <div class="block-title">Details</div>
+                            <div class="list list-strong inset">
+                                <ul style="padding: 16px 8px">
+                                    <li>
+                                        <div class="item-content item-input item-input-outline">
+                                            <div class="item-inner">
+                                                <div class="item-title item-floating-label">Title</div>
+                                                <div class="item-input-wrap">
+                                                    <input id="create-title" type="text" name="name"
+                                                        placeholder="Recipe title" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="text-editor" id="recipe-description-editor-create">
+                                                    <div id="create-description" class="text-editor-content"
+                                                        contenteditable></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content" style="padding-right: 16px /* i dont know why */">
+                                            <button class="button button-active" id="upload-image-button">Select
+                                                image</button>
+                                            <img id="upload-image-preview" />
+                                        </div>
+                                        <form>
+                                            <input id="upload-image-input" type="file" hidden />
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="block-title">Source</div>
+                            <div class="block block-strong inset" style="overflow: hidden">
+                                <div class="toolbar toolbar-top tabbar toolbar-fill">
+                                    <div class="toolbar-inner">
+                                        <a href="#upload-file" class="tab-link tab-link-active">File</a>
+                                        <a href="#upload-url" class="tab-link">URL</a>
+                                        <span class="tab-link-highlight" style="width: 50%; transform: translate3d(0%, 0px, 0px);"></span>
+                                    </div>
+                                </div>
+                                <div class="tabs-animated-wrap">
+                                    <div class="tabs">
+                                        <div id="upload-file" class="tab tab-active">
+                                            <div class="block">
+                                                <button class="button button-active" id="upload-file-button">Select
+                                                    file</button>
+                                            </div>
+                                            <input id="upload-file-input" type="file" hidden />
+                                        </div>
+                                        <div id="upload-url" class="tab">
+                                            <div class="block list">
+                                                <div class="item-content item-input item-input-outline">
+                                                    <div class="item-inner">
+                                                        <div class="item-title item-floating-label">URL</div>
+                                                        <div class="item-input-wrap">
+                                                            <input id="create-url" type="text" name="name"
+                                                                placeholder="Recipe URL" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block">
+                                <button class="button button-active" id="button-create-recipe">Save</button>
+                            </div>
+                        </div>
+
+                        <div id="view-settings" class="view view-init tab" data-view="settings">...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="ext/framework7-bundle.min.js"></script>
+    <script src="ext/mammoth.js"></script>
+    <script src="comms.js"></script>
+    <script src="id.js"></script>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+    <script src="views/category.js"></script>
+    <script src="views/create.js?9"></script>
+    <script src="views/home.js"></script>
+    <script src="views/recipe.js?2"></script>
+    <script src="views/search.js?2"></script>
+</body>
+
+</html>
